@@ -1,0 +1,22 @@
+{% extends 'tasks/base.html' %}
+{% block content %}
+    <h2>لیست کارها</h2>
+    <a href="{% url 'tasks:task_create' %}" class="btn btn-primary mb-3">کار جدید</a>
+    <ul class="list-group">
+        {% for task in tasks %}
+            <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    {% if task.completed %}
+                        <s>{{ task.title }}</s>
+                    {% else %}
+                        {{ task.title }}
+                    {% endif %}
+                </div>
+                <div>
+                    <a href="{% url 'tasks:task_update' task.id %}" class="btn btn-sm btn-warning">ویرایش</a>
+                    <a href="{% url 'tasks:task_delete' task.id %}" class="btn btn-sm btn-danger">حذف</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
